@@ -14,19 +14,21 @@ text_page = page.text
 
 #search allows us to find the expressions we are looking for in the text; x and y only require one matching group to find a good expression, z took three to get the correct spot
 x = re.search('class="[a-zA-Z|\d]{3,6}">([a-zA-Z|\s]{3,9})<\/div>', text_page)
-#doesn't take into account down by
-#y = re.search('aria-label="(Up by \S{3,7})"><div', text_page)
-z = re.search('P2Luy Ez2Ioe">([+-]?)([0-9]*.?[0-9]{1,})</span>(</div>){4}.{1,70}Dow Jones', text_page)
+y = re.search('aria-label="([a-zA-Z]{2,4})\s(by)\s(\S{3,7})"><div', text_page)
+z = re.search('P2Luy (Ebnabc|Ez2Ioe)">([+-]?)([0-9]*.?[0-9]{1,})</span>(</div>){4}.{1,70}Dow Jones', text_page)
 
-"""
-test code
+
+"""#test code
 print(x.group(1))
 print(y.group(1))
+print(y.group(2))
+print(y.group(3))
 print(z.group(2))
+print(z.group(3))
 """
 
 #concatenate the print to get the first task, print groups for each search; need to use group(2) for access to the correct number due to increase in number of matching groups
-#print('The ' + x.group(1) + ' is ' + 'y.group(1)' + ' or ' + z.group(2) + ' points')
+print('The ' + x.group(1) + ' is ' + y.group(1) + ' ' + y.group(2) + ' ' + y.group(3) + ' or ' + z.group(2) + z.group(3) + ' points' + '.')
 
 #counter
 i = 0
@@ -55,5 +57,4 @@ def normalizeName(s):
         s = re.sub(r"(folder|report)\[@name=['\"](.*?)['\"]\]", r'\2', s)
     return s
 
-#s = '/content/folder[@name="Greg"]/folder[@name="CST499"]/report[@name="Greg Report"]'
 print(normalizeName(s1))
