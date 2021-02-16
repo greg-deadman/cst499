@@ -52,9 +52,11 @@ print(test3)
 print(test4)"""
 
 s1 = '/content/folder[@name="Greg"]/folder[@name="CST499"]/report[@name="Greg Report"]'
+s2 = '/content/report[@name="Lucas Report"]'
 def normalizeName(s):
     while len(re.findall(r"(folder|report)\[@name=['\"](.*?)['\"]\]", s))>0:
         s = re.sub(r"(folder|report)\[@name=['\"](.*?)['\"]\]", r'\2', s)
     return s
 
 print(normalizeName(s1))
+print(normalizeName(s2))
