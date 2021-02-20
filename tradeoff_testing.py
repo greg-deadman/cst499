@@ -19,14 +19,28 @@ z = re.search('P2Luy (Ebnabc|Ez2Ioe)">([+-]?)([0-9]*.?[0-9]{1,})</span>(</div>){
 #concatenate the print to get the first task, print groups for each search; need to use group(2) for access to the correct number due to increase in number of matching groups
 print('The ' + x.group(1) + ' is ' + y.group(1) + ' ' + y.group(2) + ' ' + y.group(3) + ' or ' + z.group(2) + z.group(3) + ' points' + '.')
 
-""" DOW JONES BEAUTIFUL SOUP """
+""" DOW JONES BEAUTIFUL SOUP - not finished"""
 soup = BeautifulSoup(text_page, 'html.parser')
-print('The', soup.find(string=re.compile("Dow Jones")), 'is', )
+print('The', soup.find(string=re.compile("Dow Jones")), 'is' )
 #print('The ') + print(soup.find(string=re.compile("Dow Jones"))) + print(' is ') + print(soup.find(string=re.compile("Up by" or "Down by")))
 
 """ DOW JONES XPATH """
 
 """ AUTHOR RETRIEVAL REGEX """
+#retrieve site and convert to string
+page1 = requests.get('https://agilemanifesto.org/authors.html')
+text_page1 = page1.text
+
+#counter
+i = 0
+#list of authors
+authors = re.findall('<b>([a-zA-Z|\s|.]{3,})<\/b>', text_page1)
+#while i is less than the length of author list, print authors
+while i < len(authors):
+    #use the tuple to print the 1st item or the 0th part of the index
+    print(authors[i])
+    #increment
+    i += 1
 
 """ AUTHOR RETRIEVAL BEAUTIFUL SOUP """
 
