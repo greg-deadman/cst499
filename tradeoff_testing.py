@@ -47,7 +47,25 @@ while i < len(authors):
 """ AUTHOR RETRIEVAL XPATH """
 
 """ AGILE PRINCIPLE REGEX """
+#retrieve site and convert to string
+page2 = requests.get('https://agilemanifesto.org/principles.html')
+text_page2 = page2.text
 
+#use function to eliminate extra breaks in each principle
+def normalizePrinciple(s):
+    while len(re.findall(r"(<br>|<font size=\"+2\">|</font>)", s)) > 0:
+        s = re.sub(r"(<br>|<font size=\"+2\">|</font>)", '', s)
+    return s
+#counter
+i = 0
+#list of principles
+principles = re.findall('', text_page2)
+#while i is less than the length of principle list, print principles
+while i < len(principles):
+    #use the tuple to print the 1st item or the 0th part of the index
+    print(principles[i])
+    #increment
+    i += 1 
 """ AGILE PRINCIPLE BEAUTIFUL SOUP """
 
 """ AGILE PRINCIPLE XPATH """
