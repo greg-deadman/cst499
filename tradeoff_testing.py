@@ -1,12 +1,7 @@
-#used pip install lxml to retrieve lxml library
 import requests
 import re
 from bs4 import BeautifulSoup
-from lxml import etree
-import xml.etree.ElementTree as ET 
-
-"""root = etree.Element('root')
-print(root.tag)"""
+from lxml import html
 
 page = requests.get('https://www.google.com/finance')
 text_page = page.text
@@ -21,7 +16,6 @@ z = re.search('P2Luy (Ebnabc|Ez2Ioe)">([+-]?)([0-9]*.?[0-9]{1,})</span>(</div>){
 
 #concatenate the print to get the first task, print groups for each search; need to use group(2) for access to the correct number due to increase in number of matching groups
 print('The ' + x.group(1) + ' is ' + y.group(1) + ' ' + y.group(2) + ' ' + y.group(3) + ' or ' + z.group(2) + z.group(3) + ' points' + '.')
-
 
 """ DOW JONES BEAUTIFUL SOUP """
 print('\n', 'Dow Jones Beautiful Soup')
@@ -44,7 +38,7 @@ tags1 = soup.find_all("span", "P2Luy Ez2Ioe")
 print(tags1[0].get_text(), 'points.')
 
 
-""" DOW JONES XPATH """
+""" DOW JONES XPATH - not finished """
 print('\n', 'Dow Jones XPath')
 print('-------------------------------')
 
@@ -68,7 +62,6 @@ while i < len(authors):
 """ AUTHOR RETRIEVAL BEAUTIFUL SOUP """
 print('\n', 'Author Retrieval Beautiful Soup')
 print('-------------------------------')
-
 #create instance of soup
 soup1 = BeautifulSoup(text_page1, 'html.parser')
 #find all b tags
@@ -76,16 +69,18 @@ tags2 = soup1.find_all("b")
 #print all b tags
 for j in tags2:
     print(j.get_text())
-   
 
-""" AUTHOR RETRIEVAL XPATH """
+""" AUTHOR RETRIEVAL XPATH - not finished """
 print('\n', 'Author Retrieval XPath')
 print('-------------------------------')
-"""tree = ET.fromstring(requests.get('https://agilemanifesto.org/authors.html').text)
-for child in tree:
-    print("%s - %s"%(child.get('b'))"""
 
-""" AGILE PRINCIPLE REGEX """
+author_url = requests.get('https://agilemanifesto.org/authors.html')
+tree = html.fromstring(author_url.content)
+author = tree.xpath('//b')
+for child in author:
+    print(child.tag)
+
+""" AGILE PRINCIPLE REGEX - not finished """
 print('\n', 'Agile Principle Regex')
 print('-------------------------------')
 #retrieve site and convert to string
@@ -107,10 +102,17 @@ while i < len(principles):
     print(principles[i])
     #increment
     i += 1 """
+
 """ AGILE PRINCIPLE BEAUTIFUL SOUP """
 print('\n', 'Agile Principle Beautiful Soup')
 print('-------------------------------')
+#create instance of soup
+soup2 = BeautifulSoup(text_page2, 'html.parser')
+#find all p tags
+tags3 = soup2.find_all("p")
+for h in tags3:
+    print(h.get_text())
 
-""" AGILE PRINCIPLE XPATH """
+""" AGILE PRINCIPLE XPATH - not finished"""
 print('\n', 'Agile Principle XPath')
 print('-------------------------------')
